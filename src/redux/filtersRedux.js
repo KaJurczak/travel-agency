@@ -26,6 +26,7 @@ export const removeTags = payload => ({ payload, type: REMOVE_TAGS });
 export default function reducer(statePart = [], action = {}) {
   switch (action.type) {
     case CHANGE_PHRASE:
+      // console.log('statePart', statePart, 'action', action);
       return {
         ...statePart,
         searchPhrase: action.payload,
