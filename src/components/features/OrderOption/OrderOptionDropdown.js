@@ -13,16 +13,18 @@ const OrderOptionDropdown = ({values, required, currentValue, setOptionValue}) =
       <option key='null' value=''>---</option>
     )}
     {values.map(value => (
-      <option key={value.id} value={value.id}>{value.name} ({formatPrice(value.price)})</option>
+      <option key={value.id} value={value.id}>
+        {value.name} ({formatPrice(value.price)})
+      </option>
     ))}
   </select>
 );
 
 OrderOptionDropdown.propTypes = {
-  values: PropTypes.node,
-  required: PropTypes.node,
-  currentValue: PropTypes.node,
-  setOptionValue: PropTypes.node,
+  values: PropTypes.array,
+  required: PropTypes.bool,
+  currentValue: PropTypes.string,
+  setOptionValue: PropTypes.func,
 };
 
 export default OrderOptionDropdown;
