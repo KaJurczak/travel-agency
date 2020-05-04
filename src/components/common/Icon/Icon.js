@@ -5,7 +5,7 @@ const Icon = props => (<i className={`fas fa-${props.name}`}>{props.children}</i
 
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
-  children: PropTypes.array,
+  children: PropTypes.node,
 };
 
 export default Icon;
