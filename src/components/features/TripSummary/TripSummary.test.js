@@ -37,4 +37,25 @@ describe('Component TripSummary', () => {
   it('should throw error without any of props', () => {
     expect(() => shallow(<TripSummary />)).toThrow();
   });
+
+  it('should render correct tags', () => {
+    const expectedTagOne = 'abc';
+    const expectedTagTwo = 'def';
+    const expectedTagThree = 'ghi';
+    const component = shallow(<TripSummary tags={[expectedTagOne, expectedTagTwo, expectedTagThree]}/>);
+  
+    expect(component.find('.tags span').at(0).text()).toEqual(expectedTagOne);
+    // console.log('first tag', component.find('.tags span').at(0).text());
+    expect(component.find('.tags span').at(1).text()).toEqual(expectedTagTwo);
+    expect(component.find('.tags span').at(2).text()).toEqual(expectedTagThree);
+  });
+
+  it('should throw error when prop tags doesnt exist or is empty array', () => {
+    const expectedTags = false;
+    const component = shallow(<TripSummary tags={expectedTags}/>);
+    // console.log('component', component);
+    
+    expect(component.find('.tags').text()).toEqual(expectedTags);
+    // expect(() => component).toThrow();
+  });
 });
