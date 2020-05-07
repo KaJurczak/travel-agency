@@ -50,12 +50,4 @@ describe('Component TripSummary', () => {
     expect(component.find('.tags span').at(2).text()).toEqual(expectedTagThree);
   });
 
-  it('should throw error when prop tags doesnt exist or is empty array', () => {
-    const expectedTags = false;
-    const component = shallow(<TripSummary tags={expectedTags}/>);
-    // console.log('component', component);
-    
-    expect(component.find('.tags').text()).toEqual(expectedTags);
-    // expect(() => component).toThrow();
-  });
 });
