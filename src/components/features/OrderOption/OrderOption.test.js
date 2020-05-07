@@ -115,11 +115,68 @@ for(let type in optionTypes){
         break;
       }
 
-      case 'icon': {
+      case 'icons': {
         /* tests for icon */
+        it('contains div with class icon', () => {
+          const divIcon = renderedSubcomponent.find('div .icon');
+          expect(divIcon.length).toBe(mockProps.values.length);
+        });
+
+        it('should run setOrderOption function on click into last div', () => {
+          renderedSubcomponent.find('div .icon').last().simulate('click');
+          expect(mockSetOrderOption).toBeCalledTimes(1);
+          expect(mockSetOrderOption).toBeCalledWith({ [mockProps.id]: testValue });
+        });
 
         break;
       }
+
+      case 'checkboxes': {
+        /* tests for checkboxes */
+        it('contains inputs with type=checkbox', () => {
+          const inputs = renderedSubcomponent.find('input[type="checkbox"]').length;
+          expect(inputs).toBe(mockProps.values.length);
+        });
+
+        break;
+      }
+
+      case 'number': {
+        /* tests for number */
+        it('contains div with class number', () => {
+          const divNumber = renderedSubcomponent.find('.number');
+          expect(divNumber.length).toBe(1);
+        });
+
+        it('contains inputs with type=number', () => {
+          const inputs = renderedSubcomponent.find('input[type="number"]').length;
+          expect(inputs).toBe(1);
+        });
+
+        break;
+      }
+
+      case 'text': {
+        /* tests for text */
+        it('contains inputs with type=text', () => {
+          const inputs = renderedSubcomponent.find('input[type="text"]').length;
+          expect(inputs).toBe(1);
+        });
+
+        break;
+      }
+
+      case 'date': {
+        /* tests for date */
+        // it('contains DatePicker', () => {
+        //   const datePicker = renderedSubcomponent.find('DatePicker');
+        //   expect(datePicker.length).toBe(1);
+        // });
+
+        break;
+      }
+
+
     }
   });
 }
