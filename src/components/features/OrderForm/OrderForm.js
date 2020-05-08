@@ -9,12 +9,15 @@ import { formatPrice } from '../../../utils/formatPrice';
 import { calculateTotal } from '../../../utils/calculateTotal';
 import Button from '../../common/Button/Button';
 
-const sendOrder = (options, tripCost) => {
+const sendOrder = (options, tripCost, tripName, tripId, countryCode) => {
   const totalCost = formatPrice(calculateTotal(tripCost, options));
 
   const payload = {
     ...options,
     totalCost,
+    tripName,
+    tripId,
+    countryCode,
   };
 
   const url = settings.db.url + '/' + settings.db.endpoint.orders;
@@ -36,7 +39,7 @@ const sendOrder = (options, tripCost) => {
     });
 };
 
-const OrderForm = ({tripCost, options, setOrderOption}) => {
+const OrderForm = ({tripCost, options, setOrderOption, tripName, tripId, countryCode}) => {
   const optionPrice = pricing.map(option => 
     (console.log('options', options, 'option.id', option.id),
     console.log('options[option.id]', options[option.id]),
@@ -54,7 +57,7 @@ const OrderForm = ({tripCost, options, setOrderOption}) => {
         <OrderSummary tripCost={tripCost} options={options}>
         </OrderSummary>
       </Col>
-      <Button onClick={() => sendOrder(options, tripCost)}>Order now!</Button>
+      <Button onClick={() => {options.name!='' && options.contact !='' ? sendOrder(options, tripCost, tripName, tripId, countryCode) : alert('Please write Your name and contact');}}>Order now!</Button>
     </Row>
   );
 };
@@ -64,6 +67,9 @@ OrderForm.propTypes = {
   options: PropTypes.object,
   id: PropTypes.string,
   setOrderOption: PropTypes.func,
+  tripId: PropTypes.string,
+  tripName: PropTypes.string,
+  countryCode: PropTypes.string,
 };
 
 export default OrderForm;
