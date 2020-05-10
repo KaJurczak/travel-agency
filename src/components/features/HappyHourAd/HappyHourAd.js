@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './HappyHourAd.scss';
+import { formatTime } from '../../../utils/formatTime';
 // import {Row, Col} from 'react-flexbox-grid';
 
 class HappyHourAd extends React.Component {
@@ -39,7 +40,9 @@ class HappyHourAd extends React.Component {
       <div className={styles.component}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.promoDescription}>
-          {CountdownTime > 23 * 60 * 60 ? promoDescription : CountdownTime}
+          {CountdownTime > 23 * 60 * 60 
+            ? promoDescription 
+            : formatTime(CountdownTime)}
         </div>
       </div>
     );

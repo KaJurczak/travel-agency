@@ -5,7 +5,6 @@ import HappyHourAd from './HappyHourAd';
 const select = {
   title: '.title',
   promoDescription: '.promoDescription',
-  descr: '.countdown',
 };
 
 const mockProps = {
@@ -13,31 +12,6 @@ const mockProps = {
   promoDescription: 'Dolomit sum',
 };
 
-beforeAll(() => {
-  const utilsModule = jest.requireActual('../../../utils/formatTime.js'); /* jest.requireActual use intead of import - we sure it will return real version, not mock version*/
-  utilsModule.formatTime = jest.fn(seconds => seconds);
-});
-
-describe('Component HappyHourAd', () => {
-  it('should render without crashing', () => {
-    const component = shallow(<HappyHourAd />);
-    expect(component).toBeTruthy();
-    // console.log(component.debug());
-  });
-
-  it('should render title and promoDescription', () => {
-    const component = shallow(<HappyHourAd />);
-    expect(component.exists(select.title)).toEqual(true);
-    expect(component.exists(select.promoDescription)).toEqual(true);
-  });
-
-
-  it('should render correct title', () => {
-    const component = shallow(<HappyHourAd {...mockProps} />);
-    expect(component.find(select.title).text()).toEqual(mockProps.title);
-  });
-
-});
 
 const trueDate = Date;
 const mockDate = (customDate) => class extends Date {
@@ -102,16 +76,3 @@ describe('Component HappyHourAd with mocked Date and delay', () => {
   checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
 });
 
-// test no6 - do we see promoDescription between 12-13 hour
-describe('Component HappyHourAd with mocked Date', () => {
-  checkDescriptionAtTime('12:35:58', mockProps.promoDescription);
-  checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
-  checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
-});
-
-// test no7 - do we see promoDescription when coundown goes to 0
-describe('Component HappyHourAd with mocked Date and delay', () => {
-  checkDescriptionAfterTime('11:57:58', 60 * 2 + 2, mockProps.promoDescription);
-  checkDescriptionAfterTime('11:59:59', 1 * 60 * 60, mockProps.promoDescription);
-  checkDescriptionAfterTime('11:59:59', 1 * 60 * 60 + 2, 23 * 60 * 60 - 1 + '');
-});
