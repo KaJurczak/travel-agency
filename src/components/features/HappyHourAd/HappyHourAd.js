@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from '../../layout/Hero/Hero.scss';
+import styles from './HappyHourAd.scss';
 // import {Row, Col} from 'react-flexbox-grid';
 
 class HappyHourAd extends React.Component {
@@ -35,19 +35,15 @@ class HappyHourAd extends React.Component {
     const CountdownTime = this.getCountdownTime();
     // console.log('this.getCountdownTime()', this.getCountdownTime());
     
-    
     return(
-      <div>
+      <div className={styles.component}>
         <h3 className={styles.title}>{title}</h3>
         <div className={styles.promoDescription}>
-          {CountdownTime>23*60*60 ? promoDescription : CountdownTime}
+          {CountdownTime > 23 * 60 * 60 ? promoDescription : CountdownTime}
         </div>
-        <div>..</div>
-        <div>..</div>
       </div>
     );
   }
-
 }
 
 HappyHourAd.propTypes = {
