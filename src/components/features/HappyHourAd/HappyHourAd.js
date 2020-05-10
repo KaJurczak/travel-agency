@@ -42,8 +42,8 @@ class HappyHourAd extends React.Component {
         <div className={styles.promoDescription}>
           {CountdownTime>23*60*60 ? promoDescription : CountdownTime}
         </div>
-        {/* <div>..</div>
-        <div>..</div> */}
+        <div>..</div>
+        <div>..</div>
       </div>
     );
   }

@@ -89,16 +89,24 @@ const checkDescriptionAfterTime = (time, delaySeconds, expectedDescription) => {
   });
 };
 
-// test no5. ExpectedDescription = how many seconds is left to noon
+// test no5. 
+// ExpectedDescription = how many seconds is left to noon
 describe('Component HappyHourAd with mocked Date and delay', () => {
   checkDescriptionAfterTime('11:57:58', 62, '60');
   checkDescriptionAfterTime('11:59:58', 1, '1');
   checkDescriptionAfterTime('13:00:00', 60 * 60, 22 * 60 * 60 + '');
 });
 
-// test no6
+// test no6 - do we see promoDescription between 12-13 hour
 describe('Component HappyHourAd with mocked Date', () => {
   checkDescriptionAtTime('12:35:58', mockProps.promoDescription);
   checkDescriptionAtTime('12:59:59', mockProps.promoDescription);
   checkDescriptionAtTime('12:00:00', mockProps.promoDescription);
+});
+
+// test no7 - do we see promoDescription when coundown goes to 0
+describe('Component HappyHourAd with mocked Date and delay', () => {
+  checkDescriptionAfterTime('11:57:58', 60 * 2 + 2, mockProps.promoDescription);
+  checkDescriptionAfterTime('11:59:59', 1 * 60 * 60, mockProps.promoDescription);
+  checkDescriptionAfterTime('11:59:59', 1 * 60 * 60 + 2, 23 * 60 * 60 - 1 + '');
 });
